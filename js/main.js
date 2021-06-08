@@ -1,9 +1,17 @@
 function getRndInteger(min, max) {
+  if (max > min) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
+  } else {
+  return getRndInteger = 0
+  }
 }
-console.log(getRndInteger(0, 25));
+getRndInteger(0, 25);
 
-function getRndFloat(min, max,) {
-  return Math.random() * (max - min);
+function getRndFloat(min, max) {
+  if (max > min) {
+   return Math.random() * (max - min);
+  } else {
+  return Math.random() * (min - max);
+  }
 }
-console.log(getRndFloat (0, 3));
+getRndFloat (0, 1).toFixed(1);
