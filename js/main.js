@@ -1,17 +1,18 @@
 function getRndInteger(min, max) {
-  if (max > min) {
+  if (min >= 0 && min < max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
   } else {
-    return getRndInteger = 0;
+    return ('Задан неверный диапазон!');
   }
 }
 getRndInteger(0, 25);
 
-function getRndFloat(min, max) {
-  if (max > min) {
-    return Math.random() * (max - min);
+function getRndFloat(min, max, maxDigits = 0) {
+  if (min >= 0 && min < max) {
+    let numFloat = 10 ** maxDigits;
+    return ~~((Math.random() * (max - min) + min) * numFloat) / numFloat;
   } else {
-    return Math.random() * (min - max);
+    return ('Задан неверный диапазон!');
   }
 }
-getRndFloat (0, 1).toFixed(1);
+getRndFloat(0, 5, 1);
