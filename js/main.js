@@ -9,7 +9,7 @@ getRndInteger(0, 25);
 
 function getRndFloat(min, max, maxDigits = 0) {
   if (min >= 0 && min < max) {
-    let numFloat = 10 ** maxDigits;
+    const numFloat = 10 ** maxDigits;
     return ~~((Math.random() * (max - min) + min) * numFloat) / numFloat;
   } else {
     return ('Задан неверный диапазон!');
