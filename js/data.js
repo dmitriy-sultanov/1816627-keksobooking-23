@@ -49,7 +49,7 @@ const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/ke
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const createNewAdv = () => {
+function  createNewAdv ()  {
   return {
     author:  {
       avatar: getRndArrayElement(avatars),
@@ -72,5 +72,5 @@ const createNewAdv = () => {
       lng: getRndFloat(139.70000, 139.80000, 5),
     },
   };
-};
-export {createNewAdv};
+}
+export{createNewAdv};

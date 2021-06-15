@@ -4,7 +4,7 @@ function getRndInteger (a, b) {
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
-};
+}
 
 //Случайное число с плавающей запятой
 function getRndFloat (a, b, digits = 1) {
@@ -12,7 +12,7 @@ function getRndFloat (a, b, digits = 1) {
   const upper = Math.max(Math.abs(a), Math.abs(b));
   const result = Math.random() * (upper - lower) + lower;
   return result.toFixed(digits);
-};
+}
 
 //Слуйчайный элемент масива
 const getRndArrayElement = (elements) => elements[getRndInteger(0, elements.length - 1)];
@@ -23,7 +23,7 @@ const getRndArrayFromArray = (elements) => {
   const resultLength = getRndInteger(1, elements.length);
   for (let i = 0; i < elements.length - resultLength; i++) {
     resultArray.splice(getRndInteger(0, resultArray.length - 1), 1);
-  };
+  }
   return resultArray;
 };
 
