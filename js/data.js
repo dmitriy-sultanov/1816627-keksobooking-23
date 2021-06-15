@@ -21,7 +21,7 @@ const titles = ['Заголовок 1',
   'Заголовок 7',
   'Заголовок 8',
   'Заголовок 9',
-  'Заголовок 10'
+  'Заголовок 10',
 ];
 
 const types = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -41,16 +41,16 @@ const descriptions = ['Описание 1',
   'Описание 7',
   'Описание 8',
   'Описание 9',
-  'Описание 10'
+  'Описание 10',
 ];
 
 const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
 const createNewAdv = () => {
-    return {
+  return {
     author:  {
       avatar: getRndArrayElement(avatars),
     },
@@ -72,5 +72,5 @@ const createNewAdv = () => {
       lng: getRndFloat(139.70000, 139.80000, 5),
     },
   };
-  };
-  export {createNewAdv};
+};
+export {createNewAdv};
