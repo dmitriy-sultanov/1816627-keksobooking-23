@@ -1,6 +1,7 @@
 import {getRndInteger, getRndFloat, getRndArrayElement, getRndArrayFromArray} from './utils.js';
 
-const avatars = ['img/avatars/user{{01}}.png',
+const avatarUsers = [
+  'img/avatars/user{{01}}.png',
   'img/avatars/user{{02}}.png',
   'img/avatars/user{{03}}.png',
   'img/avatars/user{{04}}.png',
@@ -12,7 +13,8 @@ const avatars = ['img/avatars/user{{01}}.png',
   'img/avatars/user{{10}}.png',
 ];
 
-const titles = ['Заголовок 1',
+const adTitles = [
+  'Заголовок 1',
   'Заголовок 2',
   'Заголовок 3',
   'Заголовок 4',
@@ -24,15 +26,16 @@ const titles = ['Заголовок 1',
   'Заголовок 10',
 ];
 
-const types = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const typesHousing = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
 const checkin = ['12:00', '13:00', '14:00'];
 
 const checkout = ['12:00', '13:00', '14:00'];
 
-const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const featuresHousing = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-const descriptions = ['Описание 1',
+const adDescriptions = [
+  'Описание 1',
   'Описание 2',
   'Описание 3',
   'Описание 4',
@@ -44,28 +47,29 @@ const descriptions = ['Описание 1',
   'Описание 10',
 ];
 
-const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+const adPhotos = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-function  createNewAdv ()  {
+function createNewAdv () {
   return {
     author:  {
-      avatar: getRndArrayElement(avatars),
+      avatar: getRndArrayElement(avatarUsers),
     },
     offer: {
-      title: getRndArrayElement(titles),
-      address: `${getRndFloat(35.65000, 35.70000, 5)}, ${getRndFloat(139.70000, 139.80000, 5)}`,
-      price: getRndInteger(5000, 50000),
-      type: getRndArrayElement(types),
+      title: getRndArrayElement(adTitles),
+      address: 'location.x, location.y',
+      price: getRndInteger(5000, 1000000),
+      type: getRndArrayElement(typesHousing),
       rooms: getRndInteger(1, 5),
       guests: getRndInteger(1, 9),
       checkin: getRndArrayElement(checkin),
       checkout: getRndArrayElement(checkout),
-      features: getRndArrayFromArray(features),
-      description: getRndArrayElement(descriptions),
-      photos: getRndArrayElement(photos),
+      features: getRndArrayFromArray(featuresHousing),
+      description: getRndArrayElement(adDescriptions),
+      photos: getRndArrayElement(adPhotos),
     },
     location: {
       lat: getRndFloat(35.65000, 35.70000, 5),
@@ -73,4 +77,9 @@ function  createNewAdv ()  {
     },
   };
 }
-export{createNewAdv};
+
+const SIMILAR_ADV_COUNT = 10;
+
+const createAds = new Array(SIMILAR_ADV_COUNT).fill().map(createNewAdv);
+
+export{createAds};
