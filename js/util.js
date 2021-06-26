@@ -1,4 +1,3 @@
-//Случайное целое число
 function getRndInteger (a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -6,7 +5,6 @@ function getRndInteger (a, b) {
   return Math.floor(result);
 }
 
-//Случайное число с плавающей запятой
 function getRndFloat (a, b, digits = 1) {
   const lower = Math.min(Math.abs(a), Math.abs(b));
   const upper = Math.max(Math.abs(a), Math.abs(b));
@@ -14,10 +12,8 @@ function getRndFloat (a, b, digits = 1) {
   return result.toFixed(digits);
 }
 
-//Слуйчайный элемент масива
 const getRndArrayElement = (elements) => elements[getRndInteger(0, elements.length - 1)];
 
-//Массив случайной длины из значений
 const getRndArrayFromArray = (elements) => {
   const resultArray = [...elements];
   const resultLength = getRndInteger(1, elements.length);
