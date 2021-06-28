@@ -54,13 +54,16 @@ const adPhotos = [
 ];
 
 function createNewAdv () {
+  const getLat = getRndFloat(35.65000, 35.70000, 5);
+  const getLng = getRndFloat(139.70000, 139.80000, 5);
+
   return {
     author:  {
       avatar: getRndArrayElement(avatarUsers),
     },
     offer: {
       title: getRndArrayElement(adTitles),
-      address: 'location.x, location.y',
+      address: `${getLat}, ${getLng}`,
       price: getRndInteger(5000, 1000000),
       type: getRndArrayElement(typesHousing),
       rooms: getRndInteger(1, 5),
@@ -72,8 +75,8 @@ function createNewAdv () {
       photos: getRndArrayElement(adPhotos),
     },
     location: {
-      lat: getRndFloat(35.65000, 35.70000, 5),
-      lng: getRndFloat(139.70000, 139.80000, 5),
+      lat: getLat,
+      lng: getLng,
     },
   };
 }
