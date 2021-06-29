@@ -1,24 +1,21 @@
-import {createAds} from './data.js';
-
-const similarCardTamplate = document.querySelector('#card')
-  .content
-  .querySelector('.popup');
-const mapCanvas = document.querySelector('#map-canvas');
-const similarCardFragment = document.createDocumentFragment();
-
-createAds.forEach(({author, offer}) => {
-  const similarCard = similarCardTamplate.cloneNode(true);
-  const popupFeautures = similarCard.querySelector('.popup__features');
+const getPopupOffer = (offerElement) =>{
+  const similarOfferTamplate = document.querySelector('#card')
+    .content
+    .querySelector('.popup');
+  const offer = offerElement.offer;
+  const author = offerElement.author;
+  const similarOffer = similarOfferTamplate.cloneNode(true);
+  const popupFeautures = similarOffer.querySelector('.popup__features');
   const features = offer.features.map((feature) => `popup__feature--${feature}`);
-  const popupPhotos = similarCard.querySelector('.popup__photos');
-  const popupTitle = similarCard.querySelector('.popup__title');
-  const popupAddress = similarCard.querySelector('.popup__text--address');
-  const popupPrice = similarCard.querySelector('.popup__text--price');
-  const popupType = similarCard.querySelector('.popup__type');
-  const popupCapacity = similarCard.querySelector('.popup__text--capacity');
-  const popupTime = similarCard.querySelector('.popup__text--time');
-  const popupDescription = similarCard.querySelector('.popup__description');
-  const popupAvatar = similarCard.querySelector('.popup__avatar');
+  const popupPhotos = similarOffer.querySelector('.popup__photos');
+  const popupTitle = similarOffer.querySelector('.popup__title');
+  const popupAddress = similarOffer.querySelector('.popup__text--address');
+  const popupPrice = similarOffer.querySelector('.popup__text--price');
+  const popupType = similarOffer.querySelector('.popup__type');
+  const popupCapacity = similarOffer.querySelector('.popup__text--capacity');
+  const popupTime = similarOffer.querySelector('.popup__text--time');
+  const popupDescription = similarOffer.querySelector('.popup__description');
+  const popupAvatar = similarOffer.querySelector('.popup__avatar');
 
   const checkingDataAvailability = () => {
     if (offer.title.length===0) {popupTitle.classList.add('hidden');}
@@ -32,7 +29,7 @@ createAds.forEach(({author, offer}) => {
     if (offer.photos.length===0) {popupPhotos.classList.add('hidden');}
   };
 
-  const getTypeTranslate = (type) => {
+  const translateTypes = (type) => {
     switch(type) {
       case 'palace' : return 'Дворец';
       case 'flat' : return 'Квартира';
@@ -45,7 +42,7 @@ createAds.forEach(({author, offer}) => {
   popupTitle.textContent = offer.title;
   popupAddress.textContent = offer.address;
   popupPrice.textContent = offer.price;
-  popupType.textContent = getTypeTranslate(offer.type);
+  popupType.textContent = translateTypes(offer.type);
   popupCapacity.textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   popupTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   popupDescription.textContent = offer.description;
@@ -69,7 +66,7 @@ createAds.forEach(({author, offer}) => {
   popupPhotos.firstElementChild.remove();
 
   checkingDataAvailability();
-  similarCardFragment.appendChild(similarCard);
-} );
+  return similarOffer;
+};
 
-mapCanvas.appendChild(similarCardFragment.firstChild);
+export {getPopupOffer};
