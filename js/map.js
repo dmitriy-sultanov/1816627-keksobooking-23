@@ -1,6 +1,6 @@
-import {createAds} from './data.js';
 import {diactivateForm, activateForm} from './form-status.js';
 import {getPopupOffer} from './popup.js';
+import {setFormValidity} from './form-validity.js';
 
 const cityTokyo = {
   lat: 35.68959,
@@ -12,6 +12,7 @@ diactivateForm();
 
 const map = L.map('map-canvas').on('load', () => {
   activateForm();
+  setFormValidity();
 }).setView(cityTokyo,10);
 
 
@@ -43,8 +44,12 @@ mainMarker.on('move', (evt) => {
   addressInput.value=`${newAddress.lat.toFixed(5)}, ${newAddress.lng.toFixed(5)}`;
 });
 
+const resetMainMarker = () => {
+  mainMarker.setLatLng(cityTokyo);
+};
+
 const createUsualMarker = ((element) => {
-  const usualPin = L.icon({
+  const usualPinIcon = L.icon({
     iconUrl: 'img/pin.svg',
     iconSize: [40, 40],
     iconAnchor: [20, 40],
@@ -53,7 +58,7 @@ const createUsualMarker = ((element) => {
   const usualMarker = L.marker(
     element.location,
     {
-      icon: usualPin,
+      icon: usualPinIcon,
     },
   ).addTo(map)
     .bindPopup(getPopupOffer(element),
@@ -62,6 +67,4 @@ const createUsualMarker = ((element) => {
   return usualMarker;
 });
 
-createAds.forEach((similarOffer)=>{
-  createUsualMarker(similarOffer);
-});
+export {createUsualMarker, resetMainMarker};
