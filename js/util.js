@@ -1,26 +1,52 @@
-function getRndInteger (a, b) {
-  const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
-  const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-}
+const showAlertTime = 5000;
 
-function getRndFloat (a, b, digits = 1) {
-  const lower = Math.min(Math.abs(a), Math.abs(b));
-  const upper = Math.max(Math.abs(a), Math.abs(b));
-  const result = Math.random() * (upper - lower) + lower;
-  return result.toFixed(digits);
-}
-
-const getRndArrayElement = (elements) => elements[getRndInteger(0, elements.length - 1)];
-
-const getRndArrayFromArray = (elements) => {
-  const resultArray = [...elements];
-  const resultLength = getRndInteger(1, elements.length);
-  for (let i = 0; i < elements.length - resultLength; i++) {
-    resultArray.splice(getRndInteger(0, resultArray.length - 1), 1);
+const getRoomEnding = (numberOfItem) => {
+  const itemWords = ['комнат', 'комнаты', 'комната'];
+  const number = numberOfItem%10;
+  if ((number>=5) || (number===0) || (numberOfItem>=11&&numberOfItem<=20)) {
+    return itemWords[0];
   }
-  return resultArray;
+  if (number > 1 && number < 5) {
+    return itemWords[1];
+  }
+  if (number===1) {
+    return itemWords[2];
+  }
 };
 
-export {getRndInteger, getRndFloat, getRndArrayElement, getRndArrayFromArray};
+const getGuestEnding = (numberOfItem) => {
+  const itemWords = ['гостей', 'гостя'];
+  const number = numberOfItem%10;
+  if (number===1) {
+    return itemWords[1];
+  } else {
+    return itemWords[0];
+  }
+};
+
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 200;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '10%';
+  alertContainer.style.top = '0%';
+  alertContainer.style.right = '10%';
+  alertContainer.style.height = '100px';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.lineHeight = '100px';
+  alertContainer.style.backgroundColor = 'orange';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, showAlertTime);
+};
+
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
+export {getGuestEnding, getRoomEnding, showAlert, isEscEvent};
