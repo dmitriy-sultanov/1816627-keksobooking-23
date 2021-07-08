@@ -1,66 +1,37 @@
-import { resetAllButton } from './action.js';
+import { resetAllButton } from './actions.js';
 
 const form = document.querySelector('.ad-form');
 const fieldsetForms = form.querySelectorAll('fieldset');
 const mapFilter = document.querySelector('.map__filters');
 const mapSelects = mapFilter.querySelectorAll('select');
 const mapFieldset = mapFilter.querySelector('fieldset');
-const mapFieldsetInputs = mapFieldset.querySelectorAll('input');
 
-const diactivateForm = () => {
+const diactivateAllForm = () => {
   form.classList.add('ad-form--disabled');
   fieldsetForms.forEach((item) => {
-    item.setAttribute('disabled','true');
-    const fieldInputs = item.querySelectorAll('input');
-    fieldInputs.forEach((input)=>{if (input)
-    {input.setAttribute('disabled','true');}
-    });
-    const fieldSelects = item.querySelectorAll('select');
-    fieldSelects.forEach((select)=> {if (select)
-    {select.setAttribute('disabled','true');}
-    });
-    const fieldButtons = item.querySelectorAll('button');
-    fieldButtons.forEach((button)=> {if (button)
-    {button.setAttribute('disabled','true');}
-    });
+    item.disabled = true;
   });
   mapFilter.classList.add('ad-form--disabled');
   mapSelects.forEach((select) => {
-    select.setAttribute('disabled','true');
+    select.disabled = true;
   });
-  mapFieldsetInputs.forEach((input) => {
-    input.setAttribute('disabled','true');
-  });
-  mapFieldset.setAttribute('disabled','true');
+  mapFieldset.disabled = true;
 };
 
-const activateForm = () => {
+const activateOfferForm = () => {
   form.classList.remove('ad-form--disabled');
   fieldsetForms.forEach((item) => {
-    item.removeAttribute('disabled');
-    const fieldInputs = item.querySelectorAll('input');
-    fieldInputs.forEach((input)=>{if (input)
-    {input.removeAttribute('disabled');}
-    });
-    const fieldSelects = item.querySelectorAll('select');
-    fieldSelects.forEach((select)=> {if (select)
-    {select.removeAttribute('disabled');}
-    });
-    const fieldButtons = item.querySelectorAll('button');
-    fieldButtons.forEach((button)=> {if (button)
-    {button.removeAttribute('disabled');}
-    });
+    item.disabled = false;
   });
-  mapFilter.classList.remove('ad-form--disabled');
-  mapSelects.forEach((select) => {
-    select.removeAttribute('disabled');
-  });
-  mapFieldsetInputs.forEach((input) => {
-    input.removeAttribute('disabled');
-  });
-  mapFieldset.removeAttribute('disabled');
   resetAllButton();
 };
 
+const activateFilterForm = () => {
+  mapFilter.classList.remove('ad-form--disabled');
+  mapSelects.forEach((select) => {
+    select.disabled = false;
+  });
+  mapFieldset.disabled = false;
+};
 
-export {diactivateForm, activateForm};
+export {diactivateAllForm, activateOfferForm, activateFilterForm};

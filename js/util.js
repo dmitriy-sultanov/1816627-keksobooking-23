@@ -1,8 +1,9 @@
-const showAlertTime = 5000;
+const SHOW_ALERT_TIME = 5000;
 
 const getRoomEnding = (numberOfItem) => {
   const itemWords = ['комнат', 'комнаты', 'комната'];
   const number = numberOfItem%10;
+
   if ((number>=5) || (number===0) || (numberOfItem>=11&&numberOfItem<=20)) {
     return itemWords[0];
   }
@@ -17,9 +18,11 @@ const getRoomEnding = (numberOfItem) => {
 const getGuestEnding = (numberOfItem) => {
   const itemWords = ['гостей', 'гостя'];
   const number = numberOfItem%10;
+
   if (number===1) {
     return itemWords[1];
-  } else {
+  }
+  else {
     return itemWords[0];
   }
 };
@@ -44,9 +47,18 @@ const showAlert = (message) => {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, showAlertTime);
+  }, SHOW_ALERT_TIME);
 };
 
 const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-export {getGuestEnding, getRoomEnding, showAlert, isEscEvent};
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {getGuestEnding, getRoomEnding, showAlert, isEscEvent, debounce};

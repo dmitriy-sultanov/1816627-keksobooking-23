@@ -1,70 +1,70 @@
-import {diactivateForm, activateForm} from './form-status.js';
+import {diactivateAllForm, activateOfferForm} from './form-status.js';
 import {getPopupOffer} from './popup.js';
-import {setFormValidity} from './form-validity.js';
+import {getFormValidity} from './form-validity.js';
 
-const cityTokyo = {
+const TOKYO_COORDINATES = {
   lat: 35.68959,
   lng: 139.69224};
 
 const addressInput=document.querySelector('#address');
 
-diactivateForm();
+diactivateAllForm();
 
-const map = L.map('map-canvas').on('load', () => {
-  activateForm();
-  setFormValidity();
-}).setView(cityTokyo,10);
-
+const map = L.map('map-canvas')
+  .on('load', () => {
+    activateOfferForm();
+    getFormValidity();
+  })
+  .setView(TOKYO_COORDINATES,10);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
+  })
+  .addTo(map);
 
-const mainPin = L.icon({
+const mainPinIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
 
-const mainMarker = L.marker(
-  cityTokyo,
+const mainPinMarker = L.marker(
+  TOKYO_COORDINATES,
   {
     draggable: true,
-    icon: mainPin,
+    icon: mainPinIcon,
   },
 ).addTo(map);
 
-const defaultAddress = mainMarker.getLatLng();
+const defaultAddress = mainPinMarker.getLatLng();
 addressInput.value=`${defaultAddress.lat.toFixed(5)}, ${defaultAddress.lng.toFixed(5)}`;
-mainMarker.on('move', (evt) => {
+mainPinMarker.on('move', (evt) => {
   const newAddress = evt.target.getLatLng();
   addressInput.value=`${newAddress.lat.toFixed(5)}, ${newAddress.lng.toFixed(5)}`;
 });
 
-const resetMainMarker = () => {
-  mainMarker.setLatLng(cityTokyo);
+const resetMainPinMarker = () => {
+  mainPinMarker.setLatLng(TOKYO_COORDINATES);
 };
 
-const createUsualMarker = ((element) => {
-  const usualPinIcon = L.icon({
+const createSimpleMarker = ((element) => {
+  const simplePinIcon = L.icon({
     iconUrl: 'img/pin.svg',
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
-
-  const usualMarker = L.marker(
+  const simplePinMarker = L.marker(
     element.location,
     {
-      icon: usualPinIcon,
+      icon: simplePinIcon,
     },
   ).addTo(map)
     .bindPopup(getPopupOffer(element),
       {keepInView: true,
       });
-  return usualMarker;
+  return simplePinMarker;
 });
 
-export {createUsualMarker, resetMainMarker};
+export {createSimpleMarker, resetMainPinMarker};
