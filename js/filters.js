@@ -1,6 +1,6 @@
 import {createSimpleMarker} from './map.js';
 
-const OFFER_QTY = 10;
+const OFFER_QUANTITY = 10;
 
 const createdOffers = new Array;
 const selectedFeatures = new Array;
@@ -13,7 +13,6 @@ const housingFeaturesFieldset = filterForm.querySelector('#housing-features');
 const featuresInputs = housingFeaturesFieldset.querySelectorAll('input');
 
 const onChangeFilterForm = (showOffers) => filterForm.addEventListener ('change', showOffers);
-
 
 const checkFilterType = (element) => (element.offer.type === housingTypeSelect.value)||
 (housingTypeSelect.value==='any');
@@ -69,7 +68,7 @@ const showSimilarOffers = (similarOffers) => {
 
   similarOffers
     .filter(filterAll)
-    .slice(0, OFFER_QTY)
+    .slice(0, OFFER_QUANTITY)
     .forEach((offer) => {
       createdOffers.push(createSimpleMarker(offer));
     });

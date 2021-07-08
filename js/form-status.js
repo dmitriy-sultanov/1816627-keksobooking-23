@@ -1,4 +1,4 @@
-import { resetAllButton } from './actions.js';
+import {resetAllButton} from './actions.js';
 
 const form = document.querySelector('.ad-form');
 const fieldsetForms = form.querySelectorAll('fieldset');

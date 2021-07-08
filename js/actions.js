@@ -1,8 +1,8 @@
-import { getData, sendData } from './api.js';
-import { getDefaultValues } from './form-validity.js';
-import { showSimilarOffers } from './filters.js';
-import { resetMainPinMarker } from './map.js';
-import { isEscEvent } from './util.js';
+import {getData, sendData} from './api.js';
+import {getDefaultValues} from './form-validity.js';
+import {showSimilarOffers} from './filters.js';
+import {resetMainPinMarker} from './map.js';
+import {isEscEvent} from './util.js';
 
 
 const body = document.querySelector('body');

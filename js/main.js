@@ -3,7 +3,7 @@ import {getData} from './api.js';
 import {showAlert, debounce} from './util.js';
 import {submitOfferForm} from './actions.js';
 import {activateFilterForm} from './form-status';
-import {onChangeFilterForm, showSimilarOffers} from './filters';
+import {showSimilarOffers, onChangeFilterForm} from './filters';
 
 const RERENDER_DELAY = 500;
 
