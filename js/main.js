@@ -2,8 +2,8 @@ import './map.js';
 import {getData} from './api.js';
 import {showAlert, debounce} from './util.js';
 import {submitOfferForm} from './actions.js';
-import {activateFilterForm} from './form-status';
-import {showSimilarOffers, onChangeFilterForm} from './filters';
+import {activateFilterForm} from './form-status.js';
+import {showSimilarOffers, onChangeFilterForm} from './filters.js';
 
 const RERENDER_DELAY = 500;
 
