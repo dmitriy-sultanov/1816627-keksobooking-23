@@ -1,4 +1,4 @@
-import {getGuestEnding, getRoomEnding} from './utils.js';
+import {getGuestEnding, getRoomEnding} from './util.js';
 
 const getPopupOffer = (offerElement) =>{
   const similarOfferTamplate = document.querySelector('#card')

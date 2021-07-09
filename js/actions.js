@@ -1,6 +1,9 @@
-import { sendData } from './api.js';
-import { resetMainMarker } from './map.js';
-import { isEscEvent } from './utils.js';
+import {getData, sendData} from './api.js';
+import {getDefaultValues} from './form-validity.js';
+import {showSimilarOffers} from './filters.js';
+import {resetMainPinMarker} from './map.js';
+import {isEscEvent} from './util.js';
+
 
 const body = document.querySelector('body');
 const offerForm = document.querySelector('.ad-form');
@@ -9,13 +12,15 @@ const errorTamplate = document.querySelector('#error').content.querySelector('.e
 const resetButton = document.querySelector('.ad-form__reset');
 const mapForm = document.querySelector('.map__filters');
 
-const resetAll = () => {
+const resetAllForm = () => {
   offerForm.reset();
+  getDefaultValues();
   mapForm.reset();
-  resetMainMarker();
+  resetMainPinMarker();
+  getData((similarOffers) => showSimilarOffers(similarOffers));
 };
 
-const messageEscKeydown = (evt) => {
+const onShowMessageEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
   }
@@ -24,16 +29,16 @@ const messageEscKeydown = (evt) => {
 function closeMessage () {
   const message = body.querySelector('.success');
   body.lastChild.remove();
-  document.removeEventListener('keydown', messageEscKeydown);
+  document.removeEventListener('keydown', onShowMessageEscKeydown);
   document.removeEventListener('click', closeMessage);
   if (message) {
-    resetAll();
+    resetAllForm();
   }
 }
 
 function showMessage (tamplate) {
   const message = body.appendChild(tamplate);
-  document.addEventListener('keydown', messageEscKeydown);
+  document.addEventListener('keydown', onShowMessageEscKeydown);
   document.addEventListener('click', closeMessage);
   if (message.className==='error') {
     message.querySelector('.error__button').addEventListener('click', closeMessage);
@@ -43,11 +48,11 @@ function showMessage (tamplate) {
 const resetAllButton = () => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
-    resetAll();
+    resetAllForm();
   });
 };
 
-const submitOfferForm  = () => {
+const submitOfferForm = () => {
   offerForm.addEventListener ('submit', (evt) => {
     evt.preventDefault();
     const data = new FormData(evt.target);

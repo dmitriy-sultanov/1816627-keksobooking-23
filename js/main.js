@@ -1,17 +1,19 @@
-import {createUsualMarker} from './map.js';
+import './map.js';
 import {getData} from './api.js';
-import {showAlert} from './utils.js';
-import {submitOfferForm} from './action.js';
+import {showAlert, debounce} from './util.js';
+import {submitOfferForm} from './actions.js';
+import {activateFilterForm} from './form-status.js';
+import {showSimilarOffers, onChangeFilterForm} from './filters.js';
 
-const SIMILAR_OFFERS_COUNT = 10;
-
+const RERENDER_DELAY = 500;
 
 getData(
   (similarOffers) => {
-    similarOffers.slice(0, SIMILAR_OFFERS_COUNT)
-      .forEach((offer) => {
-        createUsualMarker(offer);
-      });
+    showSimilarOffers(similarOffers);
+    onChangeFilterForm(debounce(()=>showSimilarOffers(similarOffers),
+      RERENDER_DELAY,
+    ));
+    activateFilterForm();
   },
   (message) => {
     message = 'При загрузке данных произошла ошибка';
@@ -19,5 +21,3 @@ getData(
   });
 
 submitOfferForm();
-
-
