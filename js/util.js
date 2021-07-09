@@ -61,4 +61,7 @@ function debounce (callback, timeoutDelay = 500) {
   };
 }
 
-export {getGuestEnding, getRoomEnding, showAlert, isEscEvent, debounce};
+const isImgFileType = (fileName, rightTypes) =>
+  rightTypes.some((typeFile) => fileName.endsWith(typeFile));
+
+export {getGuestEnding, getRoomEnding, showAlert, isEscEvent, debounce, isImgFileType};
