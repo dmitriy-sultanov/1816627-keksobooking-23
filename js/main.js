@@ -4,6 +4,8 @@ import {showAlert, debounce} from './util.js';
 import {submitOfferForm} from './actions.js';
 import {activateFilterForm} from './form-status.js';
 import {showSimilarOffers, onChangeFilterForm} from './filters.js';
+import './avatar.js';
+import './photos.js';
 
 const RERENDER_DELAY = 500;
 
