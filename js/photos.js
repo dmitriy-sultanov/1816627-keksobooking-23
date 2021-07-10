@@ -8,7 +8,6 @@ const boxForUpload = form.querySelector('.ad-form__photo-container');
 const previewBox = boxForUpload.querySelector('.ad-form__photo');
 
 const previewTemplate = document.querySelector('#photo-preview')
-  .content
   .querySelector('.photo-preview__photo');
 
 fileChooser.addEventListener('change', () => {
