@@ -36,7 +36,8 @@ const guestsValidity = () => {
   else if (rooms !=='100' && guests === '0') {
     guestsInput.style.borderColor = 'red';
     guestsInput.setCustomValidity('Нужно 100 комнат');
-  } else {
+  }
+  else {
     guestsInput.style.borderColor = 'white';
     guestsInput.setCustomValidity('');
   }

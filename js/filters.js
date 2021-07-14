@@ -18,7 +18,7 @@ const checkFilterType = (element) => (element.offer.type === housingTypeSelect.v
 (housingTypeSelect.value==='any');
 
 
-const checkFiterPrice = (element) => {
+const checkFilterPrice = (element) => {
   const price = element.offer.price;
   return ((housingPriceSelect.value==='middle')&&(price>=10000)&&(price<=50000))||
   ((housingPriceSelect.value==='low')&&(price<10000))||
@@ -56,7 +56,7 @@ const checkFilterFeatures = (element) => {
 };
 
 const filterAll = (element) => checkFilterType(element)&&
-checkFiterPrice(element)&&
+checkFilterPrice(element)&&
 checkFilterRoom(element)&&
 checkFilterGuest(element)&&
 checkFilterFeatures(element);

@@ -7,8 +7,8 @@ import {isEscEvent} from './util.js';
 
 const body = document.querySelector('body');
 const offerForm = document.querySelector('.ad-form');
-const successTamplate = document.querySelector('#success').content.querySelector('.success');
-const errorTamplate = document.querySelector('#error').content.querySelector('.error');
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const resetButton = document.querySelector('.ad-form__reset');
 const mapForm = document.querySelector('.map__filters');
 
@@ -23,27 +23,30 @@ const resetAllForm = () => {
 const onShowMessageEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
+    closeMessage();
   }
 };
 
-function closeMessage () {
+const closeMessage = () => {
   const message = body.querySelector('.success');
   body.lastChild.remove();
   document.removeEventListener('keydown', onShowMessageEscKeydown);
   document.removeEventListener('click', closeMessage);
+
   if (message) {
     resetAllForm();
   }
-}
+};
 
-function showMessage (tamplate) {
-  const message = body.appendChild(tamplate);
+const showMessage = (template) => {
+  const message = body.appendChild(template);
   document.addEventListener('keydown', onShowMessageEscKeydown);
   document.addEventListener('click', closeMessage);
+
   if (message.className==='error') {
     message.querySelector('.error__button').addEventListener('click', closeMessage);
   }
-}
+};
 
 const resetAllButton = () => {
   resetButton.addEventListener('click', (evt) => {
@@ -58,8 +61,8 @@ const submitOfferForm = () => {
     const data = new FormData(evt.target);
     sendData (
       data,
-      () => showMessage(successTamplate),
-      () => showMessage(errorTamplate),
+      () => showMessage(successTemplate),
+      () => showMessage(errorTemplate),
     );
   });
 };

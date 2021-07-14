@@ -6,7 +6,7 @@ const mapFilter = document.querySelector('.map__filters');
 const mapSelects = mapFilter.querySelectorAll('select');
 const mapFieldset = mapFilter.querySelector('fieldset');
 
-const diactivateAllForm = () => {
+const deactivateAllForm = () => {
   form.classList.add('ad-form--disabled');
   fieldsetForms.forEach((item) => {
     item.disabled = true;
@@ -34,4 +34,4 @@ const activateFilterForm = () => {
   mapFieldset.disabled = false;
 };
 
-export {diactivateAllForm, activateOfferForm, activateFilterForm};
+export {deactivateAllForm, activateOfferForm, activateFilterForm};

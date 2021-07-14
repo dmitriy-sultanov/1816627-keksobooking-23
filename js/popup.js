@@ -1,12 +1,12 @@
 import {getGuestEnding, getRoomEnding} from './util.js';
 
 const getPopupOffer = (offerElement) =>{
-  const similarOfferTamplate = document.querySelector('#card')
+  const similarOfferTemplate = document.querySelector('#card')
     .content
     .querySelector('.popup');
   const offer = offerElement.offer;
   const author = offerElement.author;
-  const similarOffer = similarOfferTamplate.cloneNode(true);
+  const similarOffer = similarOfferTemplate.cloneNode(true);
   const popupFeatures = similarOffer.querySelector('.popup__features');
   const popupPhotos = similarOffer.querySelector('.popup__photos');
   const popupTitle = similarOffer.querySelector('.popup__title');

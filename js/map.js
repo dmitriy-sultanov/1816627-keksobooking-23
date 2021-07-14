@@ -1,4 +1,4 @@
-import {diactivateAllForm, activateOfferForm} from './form-status.js';
+import {deactivateAllForm, activateOfferForm} from './form-status.js';
 import {getPopupOffer} from './popup.js';
 import {getFormValidity} from './form-validity.js';
 
@@ -8,7 +8,7 @@ const TOKYO_COORDINATES = {
 
 const addressInput=document.querySelector('#address');
 
-diactivateAllForm();
+deactivateAllForm();
 
 const map = L.map('map-canvas')
   .on('load', () => {
