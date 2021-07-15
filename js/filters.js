@@ -12,7 +12,7 @@ const housingGuestsSelect = filterForm.querySelector('#housing-guests');
 const housingFeaturesFieldset = filterForm.querySelector('#housing-features');
 const featuresInputs = housingFeaturesFieldset.querySelectorAll('input');
 
-const onChangeFilterForm = (showOffers) => filterForm.addEventListener ('change', showOffers);
+const changeFilterForm = (showOffers) => filterForm.addEventListener ('change', showOffers);
 
 const checkFilterType = (element) => (element.offer.type === housingTypeSelect.value)||
 (housingTypeSelect.value==='any');
@@ -74,4 +74,4 @@ const showSimilarOffers = (similarOffers) => {
     });
 };
 
-export {showSimilarOffers, onChangeFilterForm};
+export {showSimilarOffers, changeFilterForm};

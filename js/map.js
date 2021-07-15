@@ -1,4 +1,4 @@
-import {deactivateAllForm, activateOfferForm} from './form-status.js';
+import {makeInactiveAllForm, activateOfferForm} from './form-status.js';
 import {getPopupOffer} from './popup.js';
 import {getFormValidity} from './form-validity.js';
 
@@ -8,7 +8,7 @@ const TOKYO_COORDINATES = {
 
 const addressInput=document.querySelector('#address');
 
-deactivateAllForm();
+makeInactiveAllForm();
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -26,8 +26,8 @@ L.tileLayer(
 
 const mainPinIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  dimensions: [52, 52],
+  anchors: [26, 52],
 });
 
 const mainPinMarker = L.marker(
@@ -52,8 +52,8 @@ const resetMainPinMarker = () => {
 const createSimpleMarker = ((element) => {
   const simplePinIcon = L.icon({
     iconUrl: 'img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    dimensions: [40, 40],
+    anchors: [20, 40],
   });
   const simplePinMarker = L.marker(
     element.location,

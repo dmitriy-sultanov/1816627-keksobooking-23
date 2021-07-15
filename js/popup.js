@@ -18,7 +18,7 @@ const getPopupOffer = (offerElement) =>{
   const popupDescription = similarOffer.querySelector('.popup__description');
   const popupAvatar = similarOffer.querySelector('.popup__avatar');
 
-  const checkingDataAvailability = (features, photos, type) => {
+  const checkDataAvailability = (features, photos, type) => {
     if (!offer.title) {popupTitle.remove();}
     else {popupTitle.textContent = offer.title;}
     if (!offer.address) {popupAddress.remove();
@@ -73,7 +73,7 @@ const getPopupOffer = (offerElement) =>{
     }
   };
 
-  checkingDataAvailability(getFeatures, getPhotos, translateTypes);
+  checkDataAvailability(getFeatures, getPhotos, translateTypes);
   return similarOffer;
 };
 

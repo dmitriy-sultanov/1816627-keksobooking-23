@@ -52,7 +52,7 @@ const showAlert = (message) => {
 
 const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-const debounce = (callback, timeoutDelay = 500) => {
+const getDebounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
   return (...rest) => {
@@ -61,7 +61,4 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-const isImgFileType = (fileName, rightTypes) =>
-  rightTypes.some((typeFile) => fileName.endsWith(typeFile));
-
-export {getGuestEnding, getRoomEnding, showAlert, isEscEvent, debounce, isImgFileType};
+export {getGuestEnding, getRoomEnding, showAlert, isEscEvent, getDebounce};

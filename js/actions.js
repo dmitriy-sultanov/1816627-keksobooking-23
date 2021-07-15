@@ -3,6 +3,7 @@ import {getDefaultValues} from './form-validity.js';
 import {showSimilarOffers} from './filters.js';
 import {resetMainPinMarker} from './map.js';
 import {isEscEvent} from './util.js';
+import {resetAvatar, resetPhotoPreview} from './preview-image.js';
 
 
 const body = document.querySelector('body');
@@ -14,6 +15,8 @@ const mapForm = document.querySelector('.map__filters');
 
 const resetAllForm = () => {
   offerForm.reset();
+  resetAvatar();
+  resetPhotoPreview();
   getDefaultValues();
   mapForm.reset();
   resetMainPinMarker();
@@ -21,7 +24,7 @@ const resetAllForm = () => {
 };
 
 
-const onShowMessageEscKeydown = (evt) => {
+const showMessageEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     closeMessage();
@@ -31,7 +34,7 @@ const onShowMessageEscKeydown = (evt) => {
 const closeMessage = () => {
   const message = body.querySelector('.success');
   body.lastChild.remove();
-  document.removeEventListener('keydown', onShowMessageEscKeydown);
+  document.removeEventListener('keydown', showMessageEscKeydown);
   document.removeEventListener('click', closeMessage);
 
   if (message) {
@@ -41,7 +44,7 @@ const closeMessage = () => {
 
 const showMessage = (template) => {
   const message = body.appendChild(template);
-  document.addEventListener('keydown', onShowMessageEscKeydown);
+  document.addEventListener('keydown', showMessageEscKeydown);
   document.addEventListener('click', closeMessage);
 
   if (message.className==='error') {

@@ -21,7 +21,7 @@ const getTypePrice = (type) => {
   }
 };
 
-const guestsValidity = () => {
+const checkGuests = () => {
   const rooms = roomsInput.value;
   const guests = guestsInput.value;
 
@@ -44,7 +44,7 @@ const guestsValidity = () => {
   guestsInput.reportValidity();
 };
 
-const priceValidity = () => {
+const checkPrice = () => {
   const minPriceValue = +getTypePrice(typeInput.value);
   const priceValue = +priceInput.value;
   if (priceValue < minPriceValue) {
@@ -61,7 +61,7 @@ const priceValidity = () => {
   priceInput.reportValidity();
 };
 
-const titleValidity = () => {
+const checkTitle = () => {
   const valueLength = titleInput.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
     titleInput.style.borderColor = 'red';
@@ -85,16 +85,16 @@ const getDefaultValues = () => {
 const getFormValidity = () => {
   getDefaultValues();
 
-  titleInput.addEventListener('input', titleValidity);
+  titleInput.addEventListener('input', checkTitle);
 
-  priceInput.addEventListener('input', priceValidity);
+  priceInput.addEventListener('input', checkPrice);
   typeInput.addEventListener('change', () => {
-    priceValidity();
+    checkPrice();
     priceInput.placeholder = getTypePrice(typeInput.value);
   });
 
-  guestsInput.addEventListener('change',guestsValidity);
-  roomsInput.addEventListener('change',guestsValidity);
+  guestsInput.addEventListener('change',checkGuests);
+  roomsInput.addEventListener('change',checkGuests);
 
   timeInInput.addEventListener('change', () => {
     timeOutOptions.forEach((option) => {
