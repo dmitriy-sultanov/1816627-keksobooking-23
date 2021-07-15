@@ -20,6 +20,7 @@ const resetAllForm = () => {
   getData((similarOffers) => showSimilarOffers(similarOffers));
 };
 
+
 const onShowMessageEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
