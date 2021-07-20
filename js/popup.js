@@ -1,9 +1,16 @@
 import {getGuestEnding, getRoomEnding} from './util.js';
 
-const getPopupOffer = (offerElement) =>{
-  const similarOfferTemplate = document.querySelector('#card')
-    .content
-    .querySelector('.popup');
+const HousingType = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalow: 'Бунгало',
+  hotel: 'Отель',
+};
+
+const similarOfferTemplate = document.querySelector('#card').content.querySelector('.popup');
+
+const getPopupOffer = (offerElement) => {
   const offer = offerElement.offer;
   const author = offerElement.author;
   const similarOffer = similarOfferTemplate.cloneNode(true);
@@ -18,40 +25,66 @@ const getPopupOffer = (offerElement) =>{
   const popupDescription = similarOffer.querySelector('.popup__description');
   const popupAvatar = similarOffer.querySelector('.popup__avatar');
 
-  const checkDataAvailability = (features, photos, type) => {
-    if (!offer.title) {popupTitle.remove();}
-    else {popupTitle.textContent = offer.title;}
-    if (!offer.address) {popupAddress.remove();
-    } else {popupAddress.textContent = offer.address;}
-    if (!offer.price) {popupPrice.remove();
-    } else {popupPrice.textContent = offer.price;}
-    if (!offer.rooms|| !offer.guests) {popupCapacity.remove();
-    } else {popupCapacity.textContent = `${offer.rooms} ${getRoomEnding(offer.rooms)} для ${offer.guests} ${getGuestEnding(offer.guests)}`;}
+  const checkDataAvailability = (feautures, photos) => {
+    if (!offer.title) {
+      popupTitle.remove();
+    } else {
+      popupTitle.textContent = offer.title;
+    }
+    if (!offer.address) {
+      popupAddress.remove();
+    } else {
+      popupAddress.textContent = offer.address;
+    }
+    if (!offer.price) {
+      popupPrice.remove();
+    } else {
+      popupPrice.textContent = offer.price;
+    }
+    if (!offer.rooms|| !offer.guests) {
+      popupCapacity.remove();
+    } else {
+      popupCapacity.textContent = `${offer.rooms} ${getRoomEnding(offer.rooms)} для ${offer.guests} ${getGuestEnding(offer.guests)}`;
+    }
     if (!offer.checkin || !offer.checkout) {popupTime.remove();
-    } else {popupTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;}
+    } else {
+      popupTime.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
+    }
     if (!offer.description) {popupDescription.remove();
-    } else {popupDescription.textContent = offer.description;}
-    if (!author.avatar) {popupAvatar.remove();}
-    else {popupAvatar.src = author.avatar;}
+    } else {
+      popupDescription.textContent = offer.description;
+    }
+    if (!author.avatar) {popupAvatar.remove();
+    }
+    else {
+      popupAvatar.src = author.avatar;
+    }
     if (!offer.features) {popupFeatures.remove();
-    } else {features(offer.features);}
-    if (!offer.photos) {popupPhotos.remove();
-    } else {photos(offer.photos);}
-    if (!offer.type) {popupType.remove();
-    } else {popupType.textContent = type(offer.type);}
+    } else {
+      feautures(offer.features);
+    }
+    if (!offer.photos) {
+      popupPhotos.remove();
+    } else {
+      photos(offer.photos);
+    }
+    if (!offer.type) {
+      popupType.remove();
+    } else {
+      popupType.textContent = HousingType[offer.type];
+    }
   };
 
   const getFeatures = (offerFeatures) => {
     const features = offerFeatures.map((feature) => `popup__feature--${feature}`);
-    features.forEach(() => {
-      popupFeatures.querySelectorAll('.popup__feature').
-        forEach((item) => {
-          const elementClass = item.classList[1];
-          if (!features.includes(elementClass)) {
-            item.remove();
-          }
-        });
-    });
+    popupFeatures.querySelectorAll('.popup__feature').
+      forEach((item) => {
+        const elementClass = item.classList;
+        const lastClass = elementClass[elementClass.length-1];
+        if (!features.includes(lastClass)) {
+          item.remove();
+        }
+      });
   };
 
   const getPhotos = (offerPhotos) => {
@@ -63,17 +96,8 @@ const getPopupOffer = (offerElement) =>{
     popupPhotos.firstElementChild.remove();
   };
 
-  const translateTypes = (type) => {
-    switch(type) {
-      case 'palace' : return 'Дворец';
-      case 'flat' : return 'Квартира';
-      case 'house' : return 'Дом';
-      case 'bungalow' : return 'Бунгало';
-      case 'hotel' : return 'Отель';
-    }
-  };
 
-  checkDataAvailability(getFeatures, getPhotos, translateTypes);
+  checkDataAvailability(getFeatures, getPhotos);
   return similarOffer;
 };
 

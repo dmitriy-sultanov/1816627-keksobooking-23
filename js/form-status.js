@@ -18,7 +18,7 @@ const makeInactiveAllForm = () => {
   mapFieldset.disabled = true;
 };
 
-const activateOfferForm = () => {
+const makeActiveOfferForm = () => {
   form.classList.remove('ad-form--disabled');
   fieldsetForms.forEach((item) => {
     item.disabled = false;
@@ -26,7 +26,7 @@ const activateOfferForm = () => {
   resetAllButton();
 };
 
-const activateFilterForm = () => {
+const makeActiveFilterForm = () => {
   mapFilter.classList.remove('ad-form--disabled');
   mapSelects.forEach((select) => {
     select.disabled = false;
@@ -34,4 +34,4 @@ const activateFilterForm = () => {
   mapFieldset.disabled = false;
 };
 
-export {makeInactiveAllForm, activateOfferForm, activateFilterForm};
+export {makeInactiveAllForm, makeActiveOfferForm, makeActiveFilterForm};

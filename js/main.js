@@ -2,7 +2,7 @@ import './map.js';
 import {getData} from './api.js';
 import {showAlert, getDebounce} from './util.js';
 import {submitOfferForm} from './actions.js';
-import {activateFilterForm} from './form-status.js';
+import {makeActiveFilterForm} from './form-status.js';
 import {showSimilarOffers, changeFilterForm} from './filters.js';
 import './preview-image.js';
 
@@ -14,7 +14,7 @@ getData(
     changeFilterForm(getDebounce(()=>showSimilarOffers(similarOffers),
       RERENDER_DELAY,
     ));
-    activateFilterForm();
+    makeActiveFilterForm();
   },
   (message) => {
     message = 'При загрузке данных произошла ошибка';

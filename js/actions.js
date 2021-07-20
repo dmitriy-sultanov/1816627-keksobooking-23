@@ -3,7 +3,7 @@ import {getDefaultValues} from './form-validity.js';
 import {showSimilarOffers} from './filters.js';
 import {resetMainPinMarker} from './map.js';
 import {isEscEvent} from './util.js';
-import {resetAvatar, resetPhotoPreview} from './preview-image.js';
+import {resetPhotoPreview} from './preview-image.js';
 
 
 const body = document.querySelector('body');
@@ -15,7 +15,6 @@ const mapForm = document.querySelector('.map__filters');
 
 const resetAllForm = () => {
   offerForm.reset();
-  resetAvatar();
   resetPhotoPreview();
   getDefaultValues();
   mapForm.reset();

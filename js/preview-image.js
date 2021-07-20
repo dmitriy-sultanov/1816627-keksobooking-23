@@ -1,21 +1,30 @@
 const TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const DEFAULT_AVATAR = 'img/muffin-grey.svg';
-const adFormPhoto = {
-  WIDTH: 70,
-  HEIGHT: 70,
+const PhotoSize = {
+  height: '250',
+  width: '250',
 };
 
-const adForm = document.querySelector('.ad-form');
-const avatarInput = adForm.querySelector('.ad-form-header__input');
-const avatarPreview = adForm.querySelector('.ad-form-header__preview img');
-const adPhotoInput = adForm.querySelector('.ad-form__input');
-const adPhotoPreview = adForm.querySelector('.ad-form__photo');
+const avatarChooser = document.querySelector('.ad-form-header__input');
+const avatarPreview = document.querySelector('.ad-form-header__preview img');
 
-const loadingPhotoPreview = (input, preview) => {
-  const file = input.files[0];
+const offerChooser = document.querySelector('.ad-form__input');
+const offerContainer = document.querySelector('.ad-form__photo');
+
+const makeOfferPreviw = () => {
+  if (offerContainer.firstChild) {
+    offerContainer.firstChild.remove();
+  }
+  const photo = document.createElement('img');
+  photo.height = PhotoSize.height;
+  photo.width = PhotoSize.width;
+  offerContainer.appendChild(photo);
+  return photo;
+};
+
+const changePreviw = (chooser, preview) => {
+  const file = chooser.files[0];
   const fileName = file.name.toLowerCase();
-
-  const matches = TYPES.some((it) => fileName.endsWith(it));
+  const matches = TYPES.some((type) => fileName.endsWith(type));
 
   if (matches) {
     const reader = new FileReader();
@@ -28,38 +37,18 @@ const loadingPhotoPreview = (input, preview) => {
   }
 };
 
-const prepareAvatar = () => {
-  loadingPhotoPreview(avatarInput, avatarPreview);
-};
-
-const resetAvatar = () =>{
-  avatarPreview.src = DEFAULT_AVATAR;
-};
-
-avatarInput.addEventListener('change', prepareAvatar);
-
-const createImg = () => {
-  const img = document.createElement('img');
-  img.width = adFormPhoto.WIDTH;
-  img.height = adFormPhoto.HEIGHT;
-  return img;
-};
-
 const resetPhotoPreview = () => {
-  adPhotoPreview.innerHTML = '';
+  avatarPreview.src = 'img/muffin-grey.svg';
+  if (offerContainer.firstChild) {
+    offerContainer.firstChild.remove();
+  }
 };
 
-const prepareImage = () => {
-  const imgPreview = createImg();
-  resetPhotoPreview();
-  adPhotoPreview.appendChild(imgPreview);
-  return imgPreview;
-};
+avatarChooser.addEventListener('change', changePreviw.bind(null, avatarChooser, avatarPreview));
 
-const preparePhoto = () => {
-  loadingPhotoPreview(adPhotoInput, prepareImage());
-};
 
-adPhotoInput.addEventListener('change', preparePhoto);
+offerChooser.addEventListener('change', () => {
+  changePreviw(offerChooser, makeOfferPreviw());
+});
 
-export {resetAvatar, resetPhotoPreview};
+export {resetPhotoPreview};
